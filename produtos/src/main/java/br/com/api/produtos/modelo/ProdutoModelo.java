@@ -20,7 +20,7 @@ public class ProdutoModelo {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 
     private Long codigo;
-    private String name;
+    private String nome;
     private String marca;
 
 }
