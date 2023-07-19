@@ -21,6 +21,12 @@ const Login = () => {
     setError('');
     
     try {
+
+      const response = await axios.post('/login', {
+        email,
+        password,
+      });
+      /*
       const Autenticar = () => {
         fetch("http://localhost:8080/login/"+email, password,{
           method: 'get',
@@ -34,8 +40,8 @@ const Login = () => {
         }
 
     )};
-        
-      console.log(Autenticar.data);
+        */
+      console.log(response.data);
       // Fazer redirecionamento para a página de home, caso o login seja bem-sucedido
       window.location.href = '/';
     } catch (err) {
