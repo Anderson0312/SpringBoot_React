@@ -1,5 +1,6 @@
 package br.com.api.produtos.modelo;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,3 +24,4 @@ public class UserModelo {
     private String password;
 
 }
+
