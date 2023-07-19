@@ -9,7 +9,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 //Importação das paginas do router
 import Home from './routes/Home/Home';
-import Cadastro from './routes/Cadastro/Cadastro';
+import Cadastro from './routes/CadastroUser/Cadastro';
 import Login from './routes/Login/Login';
 import ErroPage from './routes/ErrorPage';
 import Profile from './routes/Profile/Profile';

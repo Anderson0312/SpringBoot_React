@@ -1,9 +1,9 @@
 import {useEffect, useState} from 'react';
-import Formulario from '../../components/formulario/Formulario';
+import Formulario from '../../components/formulario/FormularioCadastroProd';
 import Tabela from '../../components/tabela/Tabela';
 
 const CadastrodeProdutos = (  ) => {
-//Objeto Produto
+  //Objeto Produto
   const produto = {
     codigo : 0,
     nome : '',
