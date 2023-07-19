@@ -1,4 +1,4 @@
-function FormularioCadastroUser({botao, eventoTeclado, cadastrar, obj, cancelar }){
+function FormularioCadastroUser({ eventoTeclado, cadastrar, obj, cancelar, error }){
     return (
         <form>
             <div>
@@ -12,21 +12,22 @@ function FormularioCadastroUser({botao, eventoTeclado, cadastrar, obj, cancelar 
             </div>
             <div>
                 <label>Senha</label>
-                <input type="password" name="password" onChange={eventoTeclado} value={obj.password}  class="form-control"/>
+                <input type="password" name="password" onChange={eventoTeclado}  value={obj.password}  class="form-control"/>
             </div>
             <div>
                 <label>Confirmar Senha</label>
-                <input type="password" name="confirmarSenha" onChange={eventoTeclado} value={obj.confirmarSenha}  class="form-control"/>
+                <input type="password" name="confirmPassword" onChange={eventoTeclado} value={obj.confirmPassword}  class="form-control"/>
             </div>   
-            {
-                botao
-                ?
-                <input type="button" value="Cadastrar" onClick={cadastrar} class='btn btn-primary mt-3'/>
-                :
+            
+            {error && <div>{error}</div>}
+
                 <div>
+                <input type="button" value="Cadastrar" onClick={cadastrar} class='btn btn-primary mt-3'/>
+                
+                
                     <input type="button" value="Cancelar" onClick={cancelar} class='btn btn-secondary mt-3'/>
                 </div>
-            }
+            
                 
         </form>
     )

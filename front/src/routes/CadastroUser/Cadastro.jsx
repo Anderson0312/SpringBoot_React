@@ -11,6 +11,8 @@ const Cadastro = () => {
     confirmPassword: '',
   }
 
+  const [erro, setErro] = useState('');
+
 
   const [btnCadastrar, setBtnCadastrar] = useState(true);
   const [Users, setUser] = useState([]);
@@ -25,7 +27,12 @@ const Cadastro = () => {
 
 
     //Cadastrar Usuario
-    const cadastrar = () => {
+    const cadastrar = (event) => {
+
+      event.preventDefault();
+    
+      if (objUser.password === objUser.confirmPassword) {
+
       fetch("http://localhost:8080/cadastrarUser", {
         method: 'post',
         body: JSON.stringify(objUser),
@@ -43,6 +50,11 @@ const Cadastro = () => {
         }
   
       })
+      setErro('');
+    } else {
+      setErro('As senhas NÃO conferem!')
+    }
+
     }
 
     //Remover Usuario
@@ -77,9 +89,12 @@ const Cadastro = () => {
     })
   } 
 
+
   //Obtendo os dados do formulário
   const aoDigitar = (e) => {
     setObjUser({...objUser, [e.target.name]: e.target.value});
+    console.log('senha1:', objUser.password);
+    console.log('senhaconfirm:', objUser.confirmPassword);
   }
 
     // Limpar Formulario
@@ -92,7 +107,7 @@ const Cadastro = () => {
     <div>
       <h2 class="text-center">Cadastro</h2>
       
-     <FormularioCadastroUser botao={btnCadastrar} eventoTeclado={aoDigitar} cadastrar={cadastrar} obj={objUser} cancelar={limparFormulario}  />
+     <FormularioCadastroUser botao={btnCadastrar} eventoTeclado={aoDigitar}  cadastrar={cadastrar} obj={objUser} error={erro} cancelar={limparFormulario}  />
     </div>
   );
 };
