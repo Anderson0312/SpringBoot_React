@@ -7,14 +7,6 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     
@@ -22,28 +14,35 @@ const Login = () => {
     
     try {
 
+      /*
       const response = await axios.post('/login', {
         email,
         password,
       });
-      /*
-      const Autenticar = () => {
-        fetch("http://localhost:8080/login/"+email, password,{
-          method: 'get',
+        */
+      
+      const response = () => {
+        fetch("http://localhost:8080/login/"+email,{
+          method: 'post',
           headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}
         })
         .then(res => res.json())
         .then(res_converterido => {
           
-          //mensagem
-          alert(res_converterido.mensagem);
+          
+          console.log(res_converterido.mensagem)
+          if(res_converterido.mensagem !== undefined) {
+            alert(res_converterido.mensagem)
+          }else {
+            window.location.href = '/';
+            alert('Usuario logado com sucesso!')
+          }
         }
 
     )};
-        */
       console.log(response.data);
       // Fazer redirecionamento para a página de home, caso o login seja bem-sucedido
-      window.location.href = '/';
+      
     } catch (err) {
       setError('Credenciais inválidas');
     }
@@ -52,23 +51,25 @@ const Login = () => {
 
     return (
         <div>
-        <h2>Login</h2>
-        {error && <p>{error}</p>}
-        <form onSubmit={handleSubmit}>
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={handleEmailChange}
-          />
-          <input
-            type="password"
-            placeholder="Senha"
-            value={password}
-            onChange={handlePasswordChange}
-          />
-          <button type="submit">Entrar</button>
-        </form>
+        <h2 class="text-center">Login</h2>
+      {error && <p>{error}</p>}
+      <form onSubmit={handleSubmit}>
+        <input
+          type="email"
+          placeholder="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <br />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <br />
+        <button type="submit">Login</button>
+      </form>
       </div>
     );
     };
