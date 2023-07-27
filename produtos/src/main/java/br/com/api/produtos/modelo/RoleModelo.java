@@ -1,34 +1,28 @@
 package br.com.api.produtos.modelo;
 
-import java.util.List;
 import java.util.UUID;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="usuarios")
+@Table(name = "roles")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class UserModelo {
-
+@NoArgsConstructor
+public class RoleModelo {
+    
     @Id
     @GeneratedValue
     private UUID id;
     private String name;
-    private String email;
-    private String password;
 
-    @ManyToMany
-    private List<RoleModelo> roles;
-
-
+    public RoleModelo(UUID id) {
+        this.id = id;
+    }
 }
-

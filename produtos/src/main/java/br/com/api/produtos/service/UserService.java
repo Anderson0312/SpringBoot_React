@@ -26,22 +26,27 @@ public class UserService {
     //metodo para cadastrar usuarios ou alterar
     public ResponseEntity<?> cadastrarAlterar(UserModelo um, String acao){
 
-        if(um.getName().equals("")){
-            respostaMod.setMensagem("O NOME de usuario é obrigatório!");
-            return new ResponseEntity<RespostaModelo>(respostaMod, HttpStatus.BAD_REQUEST);
-        } else if(um.getEmail().equals("")){
-            respostaMod.setMensagem("O email é obrigatório!");
-            return new ResponseEntity<RespostaModelo>(respostaMod, HttpStatus.BAD_REQUEST);
-        } else if(um.getPassword().equals("")){
-            respostaMod.setMensagem("A Senha é obrigatório!");
-            return new ResponseEntity<RespostaModelo>(respostaMod, HttpStatus.BAD_REQUEST);
-        } else {
-            if (acao.equals("cadastrar")){
-                return new ResponseEntity<UserModelo>(userRe.save(um), HttpStatus.CREATED);
+        UserModelo existe = userRe.findByEmail(um.getEmail());
+
+            if(existe != null){
+                respostaMod.setMensagem("O Email ja foi cadastrado com outro usuario");
+                return new ResponseEntity<RespostaModelo>(respostaMod, HttpStatus.BAD_REQUEST);
+            } else if(um.getName().equals("")){
+                respostaMod.setMensagem("O NOME de usuario é obrigatório!");
+                return new ResponseEntity<RespostaModelo>(respostaMod, HttpStatus.BAD_REQUEST);
+            } else if(um.getEmail().equals("")){
+                respostaMod.setMensagem("O email é obrigatório!");
+                return new ResponseEntity<RespostaModelo>(respostaMod, HttpStatus.BAD_REQUEST);
+            } else if(um.getPassword().equals("")){
+                respostaMod.setMensagem("A Senha é obrigatório!");
+                return new ResponseEntity<RespostaModelo>(respostaMod, HttpStatus.BAD_REQUEST);
             } else {
-                return new ResponseEntity<UserModelo>(userRe.save(um), HttpStatus.OK);
+                if (acao.equals("cadastrar")){
+                    return new ResponseEntity<UserModelo>(userRe.save(um), HttpStatus.CREATED);
+                } else {
+                    return new ResponseEntity<UserModelo>(userRe.save(um), HttpStatus.OK);
+                }
             }
-        }
     }
 
     //Metodo para deletar usuarios
