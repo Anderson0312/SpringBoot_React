@@ -3,6 +3,7 @@ package br.com.api.produtos.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.api.produtos.modelo.RespostaModelo;
@@ -23,9 +24,15 @@ public class UserService {
         return userRe.findAll();
     }
 
+    //criptografia das senha
+    public BCryptPasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
+
     //metodo para cadastrar usuarios ou alterar
     public ResponseEntity<?> cadastrarAlterar(UserModelo um, String acao){
 
+        //verifica se o usuarop ja existe no banco
         UserModelo existe = userRe.findByEmail(um.getEmail());
 
             if(existe != null){
@@ -42,6 +49,8 @@ public class UserService {
                 return new ResponseEntity<RespostaModelo>(respostaMod, HttpStatus.BAD_REQUEST);
             } else {
                 if (acao.equals("cadastrar")){
+                    //sobrescreve a senha cryptografando a como uma string
+                    um.setPassword((passwordEncoder().encode(um.getPassword())));
                     return new ResponseEntity<UserModelo>(userRe.save(um), HttpStatus.CREATED);
                 } else {
                     return new ResponseEntity<UserModelo>(userRe.save(um), HttpStatus.OK);
