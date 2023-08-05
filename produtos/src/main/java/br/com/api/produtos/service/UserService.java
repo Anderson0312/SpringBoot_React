@@ -32,14 +32,14 @@ public class UserService {
     //metodo para cadastrar usuarios ou alterar
     public ResponseEntity<?> cadastrarAlterar(UserModelo um, String acao){
 
-        //verifica se o usuarop ja existe no banco
-        UserModelo existe = userRe.findByEmail(um.getEmail());
+        //verifica se o usuario ja existe no banco
+        UserModelo Userexiste = userRe.findByUsername(um.getUsername());
 
-            if(existe != null){
-                respostaMod.setMensagem("O Email ja foi cadastrado com outro usuario");
+            if(Userexiste != null){
+                respostaMod.setMensagem("O nome de usuario ja existe!");
                 return new ResponseEntity<RespostaModelo>(respostaMod, HttpStatus.BAD_REQUEST);
-            } else if(um.getName().equals("")){
-                respostaMod.setMensagem("O NOME de usuario é obrigatório!");
+            } else if(um.getUsername().equals("")){
+                respostaMod.setMensagem("O nome de usuario é obrigatorio!");
                 return new ResponseEntity<RespostaModelo>(respostaMod, HttpStatus.BAD_REQUEST);
             } else if(um.getEmail().equals("")){
                 respostaMod.setMensagem("O email é obrigatório!");

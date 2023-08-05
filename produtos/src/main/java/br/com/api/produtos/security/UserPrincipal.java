@@ -22,7 +22,7 @@ public class UserPrincipal implements UserDetails{
      
 
     public UserPrincipal(UserModelo user){
-        this.username = user.getEmail();
+        this.username = user.getUsername();
         this.password = user.getPassword();
 
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();

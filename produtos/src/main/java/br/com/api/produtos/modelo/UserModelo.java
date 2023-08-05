@@ -22,7 +22,7 @@ public class UserModelo {
     @Id
     @GeneratedValue
     private UUID id;
-    private String name;
+    private String username;
     private String email;
     private String password;
 

@@ -5,7 +5,7 @@ import FormularioCadastroUser from '../../components/formulario/FormularioCadast
 const Cadastro = () => {
 
   const User = {
-    name: '',
+    username: '',
     email: '',
     password: '',
     confirmPassword: '',

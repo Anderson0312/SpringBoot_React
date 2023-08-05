@@ -15,6 +15,18 @@ import br.com.api.produtos.service.CustomUserDetailsService;
 @Configuration
 public class SecurityConfig{
     
+    @Autowired
+    CustomUserDetailsService userDetailsService;
+
+    private BCryptPasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
+
+    @Autowired
+    protected void configure(AuthenticationManagerBuilder authz) throws Exception{
+        authz.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()

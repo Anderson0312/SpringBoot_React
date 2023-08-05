@@ -2,8 +2,8 @@ function FormularioCadastroUser({ eventoTeclado, cadastrar, obj, cancelar, error
     return (
         <form>
             <div>
-                <label>Nome</label>
-                <input type="text" name="name" onChange={eventoTeclado} value={obj.name}  class="form-control"/>
+                <label>UserNome</label>
+                <input type="text" name="username" onChange={eventoTeclado} value={obj.username}  class="form-control"/>
             </div>
             <div>
                 <label>Email</label>
